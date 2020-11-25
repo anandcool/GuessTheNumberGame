@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,Text,StyleSheet, Button, Image} from 'react-native'
+import {View,Text,StyleSheet, Button, Image, Dimensions, ScrollView} from 'react-native'
 import BodyText from '../components/BodyText'
 import MainButton from '../components/MainButton'
 import color from '../constants/color'
@@ -7,8 +7,9 @@ import color from '../constants/color'
 const GameOverScreen = props =>{
 
     return (
+        <ScrollView>
         <View style={styles.screen}>
-    <BodyText>The Game is Over!!!</BodyText>
+    <BodyText style={styles.font}>The Game is Over!!!</BodyText>
     <View style={styles.imgContainer}>
     <Image 
     source={require('../assets/success.png')}
@@ -19,6 +20,7 @@ const GameOverScreen = props =>{
     <MainButton onPress={()=>{props.onRestart()}}>NEW GAME</MainButton>
         </View>
         </View>
+        </ScrollView>
     )
 }
 
@@ -33,16 +35,16 @@ const styles = StyleSheet.create({
         height:'100%',
     },
     imgContainer:{
-        borderRadius:150,
+        borderRadius:Dimensions.get('window').width * 0.7/2,
         borderWidth:3,
         borderColor:'black',
-        width:300,
-        height:300,
+        width:Dimensions.get('window').width * 0.7,
+        height:Dimensions.get('window').width * 0.7,
         overflow:'hidden',
-        marginVertical:30
+        marginVertical:Dimensions.get('window').height/30
     },
     resultContainer:{
-        marginHorizontal:30,
+        marginHorizontal:Dimensions.get('window').height/60,
         marginVertical:20
     },
     highlight:{
@@ -52,11 +54,16 @@ const styles = StyleSheet.create({
     },
     resultText:{
         color:color.primary,
-        fontSize:20
+        fontSize:Dimensions.get('window').height < 400 ? 16 : 20
     },
     userNumberState:{
         justifyContent:'center',
         alignItems:'center'
+    },
+    font:{
+        marginTop: Dimensions.get('window').height > 200 ? 60 : 10,
+        fontWeight:'bold',
+        fontSize:18
     }
 })
 
