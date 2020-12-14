@@ -59,6 +59,24 @@ const GameScreen = props =>{
         setpassGuess(currentPassGuess => [nextNumber,...currentPassGuess])
     }
 
+    if(Dimensions.get('window').height < 500){
+
+        return (
+            <View style={styles.screen}> 
+            <BodyText>Opponent's Guess</BodyText>
+            <NumberContainer>{currentGuess}</NumberContainer>
+            <Card style={styles.btnContainer}>
+                <MainButton  onPress={()=>nextGameHandler('lower')}><Ionicons name="md-remove" size={24} color="white"/></MainButton>
+                <MainButton  onPress={()=>nextGameHandler('greater')}><Ionicons name="md-add" size={24} color="white"/></MainButton>
+            </Card>
+            <View style={styles.listContainer}>
+            <ScrollView contentContainerStyle={styles.list}>
+            {pastGuess.map((guess,index) => renderListItem(guess,pastGuess.length - index ))}
+            </ScrollView>
+            </View>
+            </View>            
+        )
+    }
 
     return (
         <View style={styles.screen}> 
